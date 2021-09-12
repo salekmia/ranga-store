@@ -105,18 +105,19 @@ const displayDetails = (data) => {
     div.classList.add("col");
     div.innerHTML = `
       <div class="card">
+      <button class="btn btn-sm mt-1 fs-2 ms-auto me-4 close-button" id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</button>
         <img src=${data.image} class="card-img-top img-fluid w-50" style="margin-left: 25%" alt="...">
         <div class="card-body">
-          <h4 class="card-title text-center">${data.title}</h4>
-          <p class="text-center">Category: ${data.category}</p>
-          <div class="d-flex justify-content-center mx-4 my-2">
+          <h4 class="card-title">${data.title}</h4>
+          <p>Category: ${data.category}</p>
+          <div class="d-flex justify-content-start my-2">
             <small class="text-success me-2">Ratings: <span class="fw-bold">${data.rating.count}</span></small>
             <small class="text-success ms-2">Rating rate: <span class="fw-bold">${data.rating.rate}</span></small>
           </div>
           <p>${data.description}</p>
           <h2>Price: $ ${data.price}</h2>
           <div class="d-flex justify-content-start mt-3">
-            <button onclick="addToCart(${data.id},${data.price})" id="addToCart-btn" class="buy-now btn btn-outline-primary">add to cart</button>
+            <button onclick="addToCart(${data.id},${data.price})" id="addToCart-btn" class="btn btn-outline-primary">add to cart</button>
           </div>
         </div>
       </div>
