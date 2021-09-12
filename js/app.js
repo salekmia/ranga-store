@@ -26,7 +26,7 @@ const showProducts = (products) => {
           <h2 class="text-center">Price: $ ${product.price}</h2>
           <div class="d-flex justify-content-between mt-3 mx-4">
             <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-outline-primary">add to cart</button>
-            <button id="details-btn" class="btn btn-outline-info">Details</button></div>
+            <button onclick="showDetails(${product.id})" id="details-btn" class="btn btn-outline-info">Details</button></div>
           </div>
         </div>
       </div>
@@ -89,4 +89,39 @@ updateTotal()
 // Buy Now button handler
 const buyNow = () => {
   alert('Thanks, your order has been taken.')
+}
+
+// Show Details
+const showDetails = (id) => {
+  const url = `https://fakestoreapi.com/products/${id}`
+  fetch(url)
+  .then(res => res.json())
+  .then(data => displayDetails(data))
+}
+
+const displayDetails = (data) => {
+  const productDetails = document.getElementById('product-details')
+  const div = document.createElement("div");
+    div.classList.add("col");
+    div.innerHTML = `
+      <div class="card">
+        <img src=${data.image} class="card-img-top img-fluid w-50" style="margin-left: 25%" alt="...">
+        <div class="card-body">
+          <h4 class="card-title text-center">${data.title}</h4>
+          <p class="text-center">Category: ${data.category}</p>
+          <div class="d-flex justify-content-center mx-4 my-2">
+            <small class="text-success me-2">Ratings: <span class="fw-bold">${data.rating.count}</span></small>
+            <small class="text-success ms-2">Rating rate: <span class="fw-bold">${data.rating.rate}</span></small>
+          </div>
+          <p>${data.description}</p>
+          <h2>Price: $ ${data.price}</h2>
+          <div class="d-flex justify-content-start mt-3">
+            <button onclick="addToCart(${data.id},${data.price})" id="addToCart-btn" class="buy-now btn btn-outline-primary">add to cart</button>
+          </div>
+        </div>
+      </div>
+    `;
+    productDetails.innerHTML = ''
+    productDetails.appendChild(div)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
