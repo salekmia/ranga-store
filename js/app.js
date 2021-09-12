@@ -17,9 +17,13 @@ const showProducts = (products) => {
       <div class="card">
         <img src=${product.image} class="card-img-top img-fluid w-50" style="margin-left: 25%" alt="...">
         <div class="card-body">
-          <h5 class="card-title">${product.title}</h5>
-          <p>Category: ${product.category}</p>
-          <h2>Price: $ ${product.price}</h2>
+          <h4 class="card-title text-center">${product.title}</h4>
+          <p class="text-center">Category: ${product.category}</p>
+          <div class="d-flex justify-content-between mx-4 my-2">
+            <small class="text-success">Ratings: <span class="fw-bold">${product.rating.count}</span></small>
+            <small class="text-success">Rating rate: <span class="fw-bold">${product.rating.rate}</span></small>
+          </div>
+          <h2 class="text-center">Price: $ ${product.price}</h2>
           <div class="d-flex justify-content-between mt-3 mx-4">
             <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-outline-primary">add to cart</button>
             <button id="details-btn" class="btn btn-outline-info">Details</button></div>
